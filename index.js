@@ -9,7 +9,7 @@ const {createServer} = require('http')
 const {Server} = require('socket.io')
 
 const app = express()
-const Port = process.env.PORT || 8000
+const Port = process.env.PORT
 
 const server = createServer(app)
 const io = new Server(server)
@@ -95,12 +95,11 @@ io.on('connection',(socket)=>{
 })
 
 
-
 app.use(express.static(path.resolve('./public')))
 
 const StaticRouter = require('./Routers/static')
 const UserRouter = require('./Routers/user')
-connectDB(process.env.MONGODB || "mongodb://127.0.0.1:27017/InstaClone")
+connectDB(process.env.MONGO_Url)
 
 app.use(express.urlencoded({extended:false}))
 app.use(cookieParser())
