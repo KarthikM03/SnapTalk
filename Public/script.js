@@ -21,7 +21,7 @@ function like(id,user,event){
         fetch(`/user/like/${id}`,{method:"POST"})
         .then((res)=>res.json())
         .then((data)=>{
-            console.log(event.target)
+        
             if (data.like == "like")  {
                 event.target.innerHTML=`
                 <i style="color: red;" class="bi bi-heart-fill like"></i>
