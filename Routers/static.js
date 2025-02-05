@@ -94,21 +94,21 @@ route
         const { fullName, email, password } = req.body
         try {
         if (req.file) {
-            const user = USER.create({
+            USER.create({
                 fullName,
                 email,
                 password,
                 profile: `/Public/UserProfiles/${req.file.filename}`
             })
-            await user.save()
+            
         }
         else {
-           const user=  USER.create({
+           USER.create({
                 fullName,
                 email,
                 password,
             })
-            await user.save()
+            
         }
         return res.redirect("/login")
         } catch (error) {
@@ -127,7 +127,7 @@ route
                 const date = moment().format('L')
                 const time = Ctime+","+date
 
-                const post = POST.create({
+                POST.create({
                     desc,
                     tags: tag,
                     Createdby: req.user,
@@ -136,7 +136,7 @@ route
                     image: `/Public/Posts/${req.file.filename}`,
                     createdAt: time
                 })
-                await post.save()
+                
                 res.redirect("/user")
             } catch (error) {
                 res.json(error)
