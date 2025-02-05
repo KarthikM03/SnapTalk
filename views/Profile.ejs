@@ -13,11 +13,12 @@
 
 <body>
     <%- include('./partials/Navbar') %>
+<p><%= user.profile %></p>
         <% if (locals.user) { %>
             <div class="container ">
                 <div class="bio d-flex justify-content-around align-items-center p-2 m-2 border rounded">
                     <div class="d-flex flex-column gap-2 justify-content-evenly align-items-center ">
-                        <img src="<%= user.profile %> " class="rounded-circle" width="130px" height="130px"
+                        <img src="<%= user.profile %>" class="rounded-circle" width="130px" height="130px"
                             alt="profile Image">
                         <h3>
                             <%= user.fullName %>
