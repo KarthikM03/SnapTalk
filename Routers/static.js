@@ -94,21 +94,23 @@ route
         const { fullName, email, password } = req.body
         try {
         if (req.file) {
+            console.log("with profile")
             USER.create({
                 fullName,
                 email,
                 password,
                 profile: `/Public/UserProfiles/${req.file.filename}`
             })
-            console.log("with profile")
+            
         }
         else {
+            console.log("without profile")
            USER.create({
                 fullName,
                 email,
                 password,
             })
-            console.log("without profile")
+            
         }
         return res.redirect("/login")
         } catch (error) {
