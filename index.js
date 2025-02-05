@@ -4,7 +4,8 @@ const path = require("path")
 const {connectDB} = require("./ConnectDB")
 const {checkUser,userAuth} = require('./middleware/auth')
 const cookieParser = require('cookie-parser')
-const Server = require('socket.io')
+
+const {Server} = require('socket.io')
 const {createServer} = require('http')
 
 const app = express()
