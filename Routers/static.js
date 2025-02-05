@@ -118,7 +118,7 @@ route
 
     //add posts
     .get("/user/addpost", (req, res) => { res.render("AddPost", { Cuser: req.user,user: req.user }) })
-    .post("/user/addpost",Posts.single('image'),(req, res) => {
+    .post("/user/addpost",Posts.single('image'),async(req, res) => {
             try {
                 const { desc, tags } = req.body
                 const tag = tags.split(" ")
@@ -126,7 +126,7 @@ route
                 const date = moment().format('L')
                 const time = Ctime+","+date
 
-                POST.create({
+                const post =await POST.create({
                     desc,
                     tags: tag,
                     Createdby: req.user,
@@ -135,6 +135,7 @@ route
                     image: `/Public/Posts/${req.file.filename}`,
                     createdAt: time
                 })
+                post.save()
                 res.redirect("/user")
             } catch (error) {
                 res.json(error)
