@@ -11,13 +11,13 @@
 </head>
 <body>
     <%- include('./partials/Navbar') %>
+    <% if (locals.error) { %>
+      <div class="alert alert-danger alert-dismissible fade show " role="alert">
+        Fill the form correctly...
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <% } %>
     <div style="height: 90vh;" class="container d-flex justify-content-center align-items-center overflow-hidden">
-      <% if (locals.error) { %>
-        <div class="alert alert-danger alert-dismissible fade show " role="alert">
-          Fill the form correctly...
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-      <% } %>
         <form method="post" action="/signup" enctype="multipart/form-data" style="width: 40%;" class=" form">
             <div class="mb-3 left_right">
               <label for="fullName" class="form-label">User Name</label>

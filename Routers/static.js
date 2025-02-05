@@ -15,7 +15,6 @@ const ProfileStrorage = multer.diskStorage({
     },
     filename: function (req, file, cb) {
         const filename = Date.now() + ".png"
-        console.log("file",filename)
         return cb(null, filename)
     },
     
@@ -101,7 +100,7 @@ route
                 password,
                 profile: `/Public/UserProfiles/${req.file.filename}`
             })
-            
+            console.log("with profile")
         }
         else {
            USER.create({
@@ -109,7 +108,7 @@ route
                 email,
                 password,
             })
-            
+            console.log("without profile")
         }
         return res.redirect("/login")
         } catch (error) {
