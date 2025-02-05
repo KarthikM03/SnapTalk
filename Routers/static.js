@@ -11,7 +11,7 @@ const path = require('path')
 //Profiles
 const ProfileStrorage = multer.diskStorage({
     destination: function (req, file, cb) {
-        return cb(null,path.join(__dirname,'/Public/UserProfiles'))
+        return cb(null,'/Public/UserProfiles')
     },
     filename: function (req, file, cb) {
         const filename = Date.now() + ".png"
@@ -34,7 +34,7 @@ const Profile = multer({
 //Posts
 const PostStrorage = multer.diskStorage({
     destination: function (req, file, cb) {
-        return cb(null, path.join(__dirname,'/Public/Posts'))
+        return cb(null, '/Public/Posts')
     },
     filename: function (req, file, cb) {
         const filename = Date.now() + ".png"
