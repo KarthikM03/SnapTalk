@@ -83,7 +83,7 @@ route
             
             return res.cookie('Token', Token).redirect('/user')
         } catch (error) {
-            return res.render("login",{error})
+            return res.render("Login",{error})
         }
 
     })
@@ -111,13 +111,13 @@ route
         }
         return res.redirect("/login")
         } catch (error) {
-            res.render("signup",{error})
+            res.render("Signup",{error})
         }
         
     })
 
     //add posts
-    .get("/user/addpost", (req, res) => { res.render("Addpost", { Cuser: req.user,user: req.user }) })
+    .get("/user/addpost", (req, res) => { res.render("AddPost", { Cuser: req.user,user: req.user }) })
     .post("/user/addpost",Posts.single('image'),(req, res) => {
             try {
                 const { desc, tags } = req.body

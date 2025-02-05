@@ -6,7 +6,6 @@ const {checkUser,userAuth} = require('./middleware/auth')
 const cookieParser = require('cookie-parser')
 
 const {createServer} = require('http')
-const {Server} = require('socket.io')
 
 const app = express()
 const Port = process.env.PORT
