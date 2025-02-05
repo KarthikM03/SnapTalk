@@ -135,7 +135,7 @@ route
                     image: `/Public/Posts/${req.file.filename}`,
                     createdAt: time
                 })
-                post.save()
+                await post.save()
                 res.redirect("/user")
             } catch (error) {
                 res.json(error)
