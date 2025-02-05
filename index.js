@@ -95,7 +95,7 @@ io.on('connection',(socket)=>{
 })
 
 
-app.use(express.static(path.resolve('./public')))
+app.use(express.static(path.join(__dirname, 'public')))
 
 const StaticRouter = require('./Routers/static')
 const UserRouter = require('./Routers/user')
@@ -103,12 +103,12 @@ connectDB(process.env.MONGO_Url)
 
 app.use(express.urlencoded({extended:false}))
 app.use(cookieParser())
-app.use("/public",express.static("public"))
+app.use("/Public",express.static("public"))
 
 app.use(checkUser("Token"))
 
 app.set("view engine","ejs")
-app.set("views",path.resolve("./views"))
+app.set("views",path.join(__dirname, 'views'))
 
 app.use("/",StaticRouter)
 app.use("/user",userAuth(),UserRouter)
