@@ -15,6 +15,7 @@ const ProfileStrorage = multer.diskStorage({
     },
     filename: function (req, file, cb) {
         const filename = Date.now() + ".png"
+        console.log("file",filename)
         return cb(null, filename)
     },
     
