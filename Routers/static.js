@@ -94,20 +94,21 @@ route
         const { fullName, email, password } = req.body
         try {
         if (req.file) {
-            await USER.create({
+            const user = await USER.create({
                 fullName,
                 email,
                 password,
                 profile: `/Public/UserProfiles/${req.file.filename}`
             })
-
+            user.save()
         }
         else {
-            await USER.create({
+           const user= await USER.create({
                 fullName,
                 email,
                 password,
             })
+            user.save()
         }
         return res.redirect("/login")
         } catch (error) {
