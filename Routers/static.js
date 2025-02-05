@@ -11,7 +11,7 @@ const path = require('path')
 //Profiles
 const ProfileStrorage = multer.diskStorage({
     destination: function (req, file, cb) {
-        return cb(null, path.resolve('./Public/UserProfiles'))
+        return cb(null,'/Public/UserProfiles')
     },
     filename: function (req, file, cb) {
         const filename = Date.now() + ".png"
@@ -34,7 +34,7 @@ const Profile = multer({
 //Posts
 const PostStrorage = multer.diskStorage({
     destination: function (req, file, cb) {
-        return cb(null, path.resolve('./Public/Posts'))
+        return cb(null, '/Public/Posts')
     },
     filename: function (req, file, cb) {
         const filename = Date.now() + ".png"
@@ -94,21 +94,21 @@ route
         const { fullName, email, password } = req.body
         try {
         if (req.file) {
-            const user = await USER.create({
+            const user = USER.create({
                 fullName,
                 email,
                 password,
                 profile: `/Public/UserProfiles/${req.file.filename}`
             })
-            user.save()
+            await user.save()
         }
         else {
-           const user= await USER.create({
+           const user=  USER.create({
                 fullName,
                 email,
                 password,
             })
-            user.save()
+            await user.save()
         }
         return res.redirect("/login")
         } catch (error) {
@@ -127,7 +127,7 @@ route
                 const date = moment().format('L')
                 const time = Ctime+","+date
 
-                const post =await POST.create({
+                const post = POST.create({
                     desc,
                     tags: tag,
                     Createdby: req.user,
