@@ -103,7 +103,7 @@ connectDB(process.env.MONGO_Url)
 
 app.use(express.urlencoded({extended:false}))
 app.use(cookieParser())
-app.use("/Public",express.static("public"))
+app.use("/Public",express.static("Public"))
 
 app.use(checkUser("Token"))
 
