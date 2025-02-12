@@ -29,9 +29,7 @@ module.exports = {
     },
 
     async getUserId(Name){
-        if(Name==="m k"){
-            Name = 'm k '
-        }
+        
         try {
             const id = await USER.findOne({fullName:Name})
             return id._id
@@ -65,6 +63,7 @@ module.exports = {
 
         if(date === Recv_Time[1]){
            let time = moment(`${Recv_Time[0]}`,"h:mm a").fromNow()
+            console.log("time",time)
            return time
         }
         else{
@@ -74,9 +73,7 @@ module.exports = {
     },
 
     async GetUserProfile(name){
-        if(name==="m k"){
-            name = 'm k '
-        }
+        
         let user = await USER.findOne({fullName:name})
         return user.profile
     },
@@ -86,9 +83,6 @@ module.exports = {
     },
 
     async updateChatBg(img,name){
-        if(name==="m k"){
-            name = 'm k '
-        }
         
         await USER.findOneAndUpdate({fullName:name},{$set:{chatBg:img}})
     }
