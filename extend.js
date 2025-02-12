@@ -62,8 +62,7 @@ module.exports = {
         Recv_Time = Recv_Time.split(",")
 
         if(date === Recv_Time[1]){
-           let time = moment(`${Recv_Time[0]}`,"h:mm A").fromNow()
-            console.log("time",time)
+           let time = moment(`${Recv_Time[0]}`,"h:mm a").fromNow()
            return time
         }
         else{
