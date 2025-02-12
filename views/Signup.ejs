@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up</title>
+    <%- include('./partials/Head') %>
+    <%- include('./partials/script') %>
+    <link rel="stylesheet" href="/Public/style.css">
+
+</head>
+<body>
+    <%- include('./partials/Navbar') %>
+    <% if (locals.error) { %>
+      <div class="alert alert-danger alert-dismissible fade show test" role="alert">
+        <%= error %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <% } %>
+    <div style="height: 90vh;" class="container d-flex flex-column justify-content-center align-items-center overflow-hidden">
+        <form method="post" action="/signup" enctype="multipart/form-data" class=" form">
+            <div class="mb-3 left_right">
+              <label for="fullName" class="form-label">User Name</label>
+              <input type="text" class="form-control" placeholder="Enter your name [A-Z,a-z,0-9]" name="fullName" pattern="[A-Za-z0-9]+">
+            </div>
+            <div class="mb-3 right_left ">
+              <label for="fullName" class="form-label">Profile Image</label>
+              <input type="file" class="form-control" name="profile" >
+            </div>
+            <div class="mb-3 left_right">
+              <label for="email" class="form-label">Email address</label>
+              <input type="email" class="form-control int" name="email" >
+            </div>
+            <div class="mb-3 right_left ">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control"  name="password">
+            </div>
+            
+            <button type="submit" class="btn btn-primary down_up">Create Account</button>
+          </form>
+          <div class="reaveal">
+            Already have an Account? <b><a style="text-decoration: none;" href="/login">Login Now</a></b>
+          </div>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add post</title>
+    <%- include('./partials/Head') %>
+    <%- include('./partials/script') %>
+    <link rel="stylesheet" href="/Public/style.css">
+
+</head>
+<body>
+    <%- include('./partials/Navbar') %>
+    <% if (locals.error) { %>
+      <div class="alert alert-danger alert-dismissible fade show test" role="alert">
+        <%= error %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <% } %>
+    <div style="height: 90vh;"  class="container mt-3 d-flex justify-content-center align-items-center">
+        <form method="post" action="/user/addpost" enctype="multipart/form-data"  class="form">
+            <div class="mb-3 rounded p-1 left_right">
+              <label  class="form-label">Upload Image</label>
+              <input type="file" class="form-control" name="post" >
+            </div>
+            <div class="mb-3 rounded p-1 right_left">
+              <label  class="form-label">Description / Caption</label>
+              <input type="text" class="form-control" name="desc">
+            </div>
+            <div class="mb-3 rounded p-1 left_right">
+              <label  class="form-label">Tags</label>
+              <input type="text" class="form-control" name="tags" placeholder="Tags are separated by (space bar)">
+            </div>
+            
+            <button type="submit rounded p-1 down_up" class="btn btn-primary down_up">Add Post</button>
+          </form>
+        
+    </div>
+</body>
+</html>

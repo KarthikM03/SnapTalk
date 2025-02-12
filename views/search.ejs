@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search</title>
+    <%- include('./partials/Head') %>
+    <%- include('./partials/script') %>
+    <link rel="stylesheet" href="/Public/style.css">
+
+</head>
+<body>
+    <%- include('./partials/Navbar') %>
+    <div class="container mt-3">
+        <form class="d-flex" role="search" method="post" action="/search" class="search" >
+            <% if (locals.search) { %>
+                <input class="form-control me-2" type="search" value="<%= search %>" placeholder="Search Posts" name="search" aria-label="Search">
+            <% } else{ %>
+                <input class="form-control me-2" type="search" placeholder="Search Posts" name="search" aria-label="Search">
+
+            <%}%>
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    <div class="mt-5">
+    <% if (locals.posts) { %>
+        <div class="">
+            <div class="d-flex gap-4 flex-wrap" >
+                <% posts.forEach(post => { %>
+                    
+                    <a href="/post/<%= post._id %>" class="shadow rounded nav-link post" >
+                        <img src="<%= post.image %>" style="object-fit:cover;" alt="">
+                    </a>
+                    
+                <% }) %>
+            </div>
+        </div>
+    <% } %>
+    </div>
+    </div>
+    
+</body>
+</html>

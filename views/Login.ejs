@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <%- include('./partials/Head') %>
+    <%- include('./partials/script') %>
+    <link rel="stylesheet" href="/Public/style.css">
+    
+</head>
+<body>
+    <%- include('./partials/Navbar') %>
+    <% if (locals.error) { %>
+      <div class="alert alert-danger alert-dismissible fade show test" role="alert">
+        <%= error %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <% } %>
+    <div style="height: 90vh;" class="container d-flex flex-column justify-content-center align-items-center overflow-hidden">
+        <form action="/login" method="post"  class="form ">
+            <div class="mb-3 rounded p-1 left_right">
+              <label for="email" class="form-label">Email address</label>
+              <input type="email" class="form-control" name="email" >
+            </div>
+            <div class="mb-3 rounded p-1 right_left ">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control"  name="password">
+            </div>
+            
+            <button type="submit" class="btn btn-primary down_up">Login</button>
+          </form>
+          <div class="reaveal">
+            Don't have an Account? <b><a style="text-decoration: none;" href="/signup">Sign Up now</a></b>
+          </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Followers</title>
+    <%- include('./partials/Head') %>
+        <%- include('./partials/script') %>
+            <link rel="stylesheet" href="/Public/style.css">
+</head>
+
+<body>
+    <%- include('./partials/Navbar') %>
+    <div style="height: 90vh;">
+        <div style="height: 100%;width: max-content;" class="container-fluid d-flex flex-column align-items-center border overflow-auto">
+            <div class="d-flex gap-2 mt-3">
+                <% if (locals.f === "followers") { %>
+                    <a href="/user/profile/<%= user.email %>/followers" class= " p-2 border rounded btn btn-primary">Followers</a>
+                    <a href="/user/profile/<%= user.email %>/following" class="nav-link p-2 border rounded ">Following</a>
+                <% } else{ %>
+                    <a href="/user/profile/<%= user.email %>/followers" class= "nav-link p-2 border rounded ">Followers</a>
+                    <a href="/user/profile/<%= user.email %>/following" class=" p-2 border rounded btn btn-primary">Following</a>
+                <%}
+                %>
+            </div>
+<br>
+            <div style="width: max-content;" class="mt-2">
+                <% if (locals.f==="followers" ) { %>
+                    <% locals.user.followers.forEach(per=> { %>
+                            <div class="d-flex justify-content-between gap-5 p-2 ">
+                                <a class="nav-link" href="/user/profile/<%= per.email %>">
+                                <div class="d-flex gap-2">
+                                    <img style="width: 40px;height: 40px;" class="rounded-circle"
+                                        src="<%= per.profile %>" alt="">
+                                    <p>
+                                        <%= per.fullName %>
+                                    </p>
+                                </div>
+                                </a>
+                                <div class="d-flex gap-2">
+                                    <form action="/user/follower/<%= per._id %>" method="post">
+                                        <button class="btn border border-2 btn-outline-dark shadow rounded"
+                                            type="submit ">
+                                            <%= helper.CheckFollow(per,user) %>
+                                        </button>
+                                    </form>
+                                    <a href="/user/chat?user=<%= per.fullName %>" class="nav-link">
+                                        <button class="btn border border-2 btn-outline-info shadow rounded"
+                                            type="button">Message</button>
+                                    </a>
+                                </div>
+                            </div>
+                        
+                        <% }) %>
+                            <% } else { %>
+                                <% locals.user.following.forEach(per=> { %>
+                                    
+                                        <div class="d-flex justify-content-between gap-5 p-2">
+                                            <a class="nav-link" href="/user/profile/<%= per.email %>">
+
+                                            <div class="d-flex gap-2">
+                                                <img style="width: 40px;height: 40px;" class="rounded-circle"
+                                                    src="<%= per.profile %>" alt="">
+                                                <p>
+                                                    <%= per.fullName %>
+                                                </p>
+                                            </div>
+                                            </a>
+                                            <div class="d-flex gap-2">
+                                                <form action="/user/follower/<%= per._id %>" method="post">
+                                                    <button class="btn border border-2 btn-outline-dark shadow rounded"
+                                                        type="submit ">
+                                                        <%= helper.CheckFollow(per,user) %>
+                                                    </button>
+                                                </form>
+                                                <a href="/user/chat?user=<%= per.fullName %>" class="nav-link">
+                                                    <button class="btn border border-2 btn-outline-info shadow rounded"
+                                                        type="button">Message</button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                   
+                                    <% }) %>
+                                        <%} %>
+            </div>
+            </div>
+        </div>
+
+</body>
+
+</html>

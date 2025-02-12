@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App</title>
+    <%- include('./partials/Head') %>
+        <%- include('./partials/script') %>
+            <link rel="stylesheet" href="/Public/style.css">
+
+</head>
+
+<body>
+
+    <%- include('./partials/Navbar') %>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Change chat background</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Did you want to change background image ?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button id="apply" type="button" class="btn btn-primary" data-bs-dismiss="modal">Yes,
+                            Change</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <span id="<%= Cuser.fullName%>" class="UserID"></span>
+        <!-- CHAT LISTS -->
+        <div style="height: 100%;width: 100%;" class="container">
+            <div style="height: 80vh;" class="mt-4 mb-4 outer gap-1 position-relative">
+                <div class="sidebar p-2 rounded text-white">
+                    <div class="d-flex flex-row align-items-center justify-content-center">
+                        <i class="bi bi-arrow-left-circle toggle ms-2"></i>
+                        <span class="mx-auto h3">SnapTalk</span>
+                    </div>
+                    <div class="chatList" style="height: 90%;">
+                        <% if (chatList.length>0) { %>
+                            <% chatList.forEach(list=> { %>
+                                <% if (list.Persons.length >=2) { %>
+                                <label  class="mb-2 border rounded ">
+                                    <input type="radio" class="radio backBtn" name="user" value="<%= list._id %>">
+                                    <% if (list.roomName !=='' ) { %>
+                                        <%= list.roomName %>
+                                            <% } else{%>
+                                                    <% if (list.Persons[0].fullName===Cuser.fullName) { %>
+                                                        <img style="width: 50px;height: 50px;" class="rounded-circle"
+                                                            src="<%=list.Persons[1].profile%>" alt="" srcset="">
+                                                        <span class="m-2 semi-bold">
+                                                            <%=list.Persons[1].fullName %>
+                                                        </span>
+                                                        <% } else{%>
+                                                            <img style="width: 50px;height: 50px;" class="rounded-circle"
+                                                                src="<%=list.Persons[0].profile%>" alt="" srcset="">
+                                                            <span class="m-2 semi-bold">
+                                                                <%=list.Persons[0].fullName %>
+                                                            </span>
+                                                            <%} %>
+                                                                <%}%>
+                                                            </label>
+                                                <% } %>
+
+
+
+                                <% }) %>
+                                    <% } else {%>
+                                        <% if (persons.length !=0) { %>
+                                            <form action="" id="fomr">
+                                                <% persons.forEach(prs=> { %>
+                                                    <label style="width: 100%;" class="mb-2 border rounded">
+                                                        <input type="radio" class="person backBtn" name="user"
+                                                            value="<%= prs.fullName%>">
+                                                        <img style="width: 50px;height: 50px;" class="rounded-circle"
+                                                            src="<%=prs.profile%>" alt="" srcset="">
+                                                        <span class="m-2 semi-bold">
+                                                            <%= prs.fullName%>
+                                                        </span>
+    
+                                                    </label>
+                                                    <% }) %>
+                                            </form>
+                                        <% } else{%>
+                                            <div style="height: 100%;" class="d-flex justify-content-center h5 p-4 mt-4">
+                                                <p>
+                                                    You did't have any followers or following to start conversation...
+                                                </p>
+                                            </div>
+                                            
+                                            <%} %>
+                                        
+                                        <%} %>
+                    </div>
+                </div>
+                <!-- MESSAGES -->
+
+                <div style="background-image:url('<%=user.chatBg %>') ; background-size: cover; background-position: center;"
+                    class="chat text-white d-flex flex-column position-relative overflow-hidden rounded" id="img">
+                    <div class="ReceiverName ts position-relative p-1 ">
+                        <div class="toggle">
+                            <i class="bi bi-arrow-left-circle ms-2"></i>
+                        </div>
+                        <div class="d-flex gap-1 justify-content-center align-items-center">
+
+                            <img class="rounded-circle ms-2" style="height: 40px;width: 40px;" id="recvrPrfle" src=""
+                                alt="" srcset="">
+
+                            <h3 class="text-center  text-white" id="IDD">
+                                <%= locals.ReceiverName %>
+                            </h3>
+                        </div>
+                        <i class="bi bi-three-dots-vertical me-3 " style="font-size: 1.5rem;" data-bs-toggle="collapse"
+                            data-bs-target="#chatBg" aria-expanded="false" aria-controls="chatBg"></i>
+                        <!-- Image setting -->
+                        <div class="collapse" id="chatBg">
+                            <div style="height: max-content;width: fit-content;" class="bg-dark p-2 rounded">
+                                <h4>Change Background</h4>
+                                <div class="row">
+                                    <img class="img border" src="/Public/bg/fantasyNightwithAnimals.png" alt=""
+                                        srcset="">
+                                    <img class="img border" src="/Public/bg/fantasyNight.png" alt="" srcset="">
+                                    <img class="img border" src="/Public/bg/HousewithLights.png" alt="" srcset="">
+                                </div>
+                                <div class="row">
+                                    <img class="img border" src="/Public/bg/natureInJungle.png" alt="" srcset="">
+                                    <img class="img border" src="/Public/bg/openNature.png" alt="" srcset="">
+                                    <img class="img border" src="/Public/bg/roadandnature.png" alt="" srcset="">
+                                </div>
+                                <div class="row">
+                                    <!-- Button trigger modal -->
+                                    <button style="width: 35%;" type="button" class="btn btn-primary"
+                                        data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                        apply
+                                    </button>
+                                    <button class="btn btn-danger ms-2" id="reset" style="width: 35%;" type="button">
+                                        Reset</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div style="height: 75vh;"
+                        class="messages d-flex flex-column overflow-auto mb-1 p-3 position-relative" id="messages">
+                        <% if (locals.ReceiverName) { %>
+                            
+                            <% } else{%>
+
+                                <div class="container d-flex justify-content-center align-items-center "
+                                    style="height: 100%;">
+
+                                    <!-- HELLO_CARD -->
+                                    <div id="helloCard"
+                                        class="d-flex flex-column justify-content-center align-items-center gap-2 hello p-2">
+                                        <div style="aspect-ratio: 1;height: 5rem;background-image: url('<%=user.profile %>');background-size: cover;background-position: center;"
+                                            class="rounded-circle"></div>
+                                        <h2 class="">SnapTalk</h2>
+                                        <p style="filter: drop-shadow(0 0 1rem black); width: 80%;" class="p-2">Connect
+                                            with
+                                            friends and
+                                            make new ones on our innovative social media app, where chatting is
+                                            effortless
+                                            and fun. Dive into a vibrant community and share your moments instantly!"
+                                        </p>
+                                    </div>
+
+                                </div>
+
+                                <%} %>
+                    </div>
+
+                    <div id="sBtn" class="input-group invisible p-2 tb">
+                        <input type="text" class="form-control " id="MSG" placeholder="message" aria-label="message">
+                        <button class="input-group-text " type="button" id="Btn"><i
+                                class="bi bi-send rotate"></i></button>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"> </script>
+        <script src="/Public/chat.js"></script>
+
+</body>
+
+</html>

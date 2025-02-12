@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post</title>
+    <%- include('./partials/Head') %>
+    <%- include('./partials/script') %>
+    <link rel="stylesheet" href="/Public/style.css">
+
+</head>
+<body>
+    <%- include('./partials/Navbar') %>
+    <div class="test"></div>
+    <% if (locals.post) { %>
+    <div class="d-flex justify-content-center align-items-center">
+            <div class="card mt-3 shadow p-3 mb-5 bg-body rounded d-flex justify-content-center align-items-center" style="width: 20rem;">
+                <div class="user border-bottom d-flex gap-3 w-100 pb-2 justify-content-between align-items-center">
+                    <form action="/user/profile/<%= post.Createdby.email %>"
+                        onclick="this.submit()">
+                        <!-- PROFILE IMAGE -->
+                        <img class="rounded-circle" src="<%=post.Createdby.profile %>" width="60px"
+                            height="60px" alt="pic" srcset="">
+                        <span class="fw-bold ms-2">
+                            <%=post.Createdby.fullName%>
+                        </span>
+                    </form>
+                    <!-- FOLLOW -->
+                    <form  >
+                        <% if (user) { %>
+                            <% if (user.email===post.Createdby.email) { %>
+                                <% }else { %>
+                                    <button
+                                        class="btn border border-2 btn-outline-dark shadow rounded"
+                                        type="button" onclick="follow(`<%= post.Createdby._id %>`,`ok`,event)"><%= helper.CheckFollow(post.Createdby,Cuser) %></button>
+                                    <% } %>
+                                <% }else { %>
+                                    <button class="btn border border-2 btn-outline-dark shadow rounded" onclick="follow(`<%= post.Createdby._id %>`,null,event)" type="button">Follow</button>
+                                    <% } %>
+                    </form>
+                </div>
+                <!-- POST IMAGE -->
+                <img src="<%= post.image %>" height="200px" class="card-img-top rounded m-2 border border-2" style="object-fit: contain;background-color: black;" alt="...">
+                <div class="container">
+                    <p><%= helper.checkTime(post.createdAt) %></p>
+
+                    <div class="d-flex gap-3 align-items-center">
+                        <!-- LIKES -->
+                        <div >
+                            <% if (user) { %>
+                                <button  class="btn border shadow  rounded " type="button" onclick="like(`<%= post._id %>`,`ok`,event)">
+                                    <i style="color: red;" class="<%= helper.CheckPostLike(post,user) %> like"></i>
+                                    <%= post.Likedby.length %>
+                                </button>
+                            <% }else { %>
+                                <button  class="btn border shadow  rounded " type="button" onclick="like(`<%= post._id %>`,null,event)">
+                                    <i style="color: red;" class="bi bi-heart like"></i>
+                                    <%= post.Likedby.length %>
+                                </button>
+                            <% } %>
+
+                        </div>                                  
+                        <div>
+                            <!-- COMMENTS -->
+                            <div class="d-inline-flex gap-1">
+                                <a class="btn border shadow bg-body rounded" data-bs-toggle="collapse"
+                                    href="#collapseExample<%= post._id %>" role="button"
+                                    aria-expanded="false" aria-controls="collapseExample">
+                                    <i class="bi bi-chat">
+                                        <%= post.comment.length %>
+                                    </i>
+                                </a>
+                            </div>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapse<%= post._id %>"
+                                aria-expanded="false" aria-controls="collapseExample">
+                                <i class="bi bi-chevron-double-down"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div style=" padding: 10px 6px 0px 6px;" class="card-body">
+                        <div class="mb-3" >
+                            <!-- DESCRIPTIION -->
+                            <div class="collapse" id="collapse<%= post._id %>">
+                                <p class="border-bottom"><%= post.desc %></p>
+                                <% if (post.tags.length > 1) { %>
+                                    <div>
+                                        <!-- TAGS -->
+                                        <% post.tags.forEach(tag => { %>
+                                         <span class="px-1 py-0">#<%= tag %></span>
+                                        <% }) %>
+                                        </div>
+                                <% } %>
+                            </div>
+                        </div>
+                        <div class="collapse" style="padding: 5px;" id="collapseExample<%= post._id %>">
+                            <div style="padding: 8px;" class="card card-body">
+                                <% if (user) { %>
+                                     
+                                    <div class="input-group mb-3" >
+                                        <!--ADD COMMENT -->
+                                        <input type="text" name="comment" class="form-control rounded-1"
+                                            placeholder="Enter Comment" aria-label="Recipient's username"
+                                            aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            
+                                            <button
+                                                style="padding-left: 2px; padding-right: 2px; margin-left: 8px;"
+                                                class="btn btn-outline-secondary rounded-1"
+                                                type="button" onclick="comment('<%= post._id %>',event,'<%=user.fullName%>','<%=user.profile%>')">Comment</button>
+                                        </div>
+                                    </div>
+                                <% } %>
+                                <div style="max-height: 300px;" class="d-flex flex-column gap-2 overflow-auto cmt" >
+                                    <!-- COMMENTS -->
+                                    <% post.comment.forEach(comment=> { %>
+                                        <div class=" mt-1 d-flex">
+                                            
+                                            <img style="width: 40px; height: 40px;"
+                                                class="rounded-circle"
+                                                src="<%= comment.CommentBy.profile %>" alt="">
+                                            
+                                            <div style="padding-left: 1em; margin-top: 0.25em;">
+                                                <div class="fw-bold">
+                                                    <%= comment.CommentBy.fullName%>
+                                                </div>
+                                                <div style="max-height: 150px;overflow-y: auto;" class="cmtt">
+                                                <%= comment.comment%>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <% }) %>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>
+
+        <script src="/Public/script.js"></script>
+
+</body>
+</html>
