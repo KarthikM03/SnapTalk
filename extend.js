@@ -30,9 +30,18 @@ module.exports = {
     },
 
     async getUserId(Name){
-        const id = await USER.findOne({fullName:Name})
-        return id._id
-
+        if(Name==="m k"){
+            Name = 'm k '
+        }
+        try {
+            const id = await USER.findOne({fullName:Name})
+            return id._id
+            
+        } catch (error) {
+            
+        }
+        
+        
     },
     async GetRoomID(SN,RN){
         const roomID = await Room.findOne({$and:[
@@ -66,9 +75,7 @@ module.exports = {
     },
 
     async GetUserProfile(name){
-        if(name==="m k"){
-            name = 'm k '
-        }
+        
         let user = await USER.findOne({fullName:name})
         return user.profile
     },
@@ -78,9 +85,6 @@ module.exports = {
     },
 
     async updateChatBg(img,name){
-        if(name==="m k"){
-            name = 'm k '
-        }
         
         await USER.findOneAndUpdate({fullName:name},{$set:{chatBg:img}})
     }
