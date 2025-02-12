@@ -73,8 +73,8 @@ io.on('connection',(socket)=>{
 
     // SENDING MSG
     socket.on("SendingMsg",async(Message,receiverId,senderId)=>{
-        const Ctime = moment().format('LT')
-        const date = moment().format('L')
+        const Ctime = moment().tz("Asia/Kolkata").format('LT')
+        const date = moment().tz("Asia/Kolkata").format('L')
         const time = Ctime+","+date
         CHATS.create({
             Message,

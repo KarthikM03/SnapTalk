@@ -1,6 +1,7 @@
 const {CHATS,Room}  = require("./Model/msg")
 const USER = require("./Model/user")
 const moment = require('moment')
+const asia = require("moment-timezone")
 
 module.exports = {
     CheckPostLike(post,user){
@@ -29,18 +30,9 @@ module.exports = {
     },
 
     async getUserId(Name){
-        if(Name==="m k"){
-            Name = 'm k '
-        }
-        try {
-            const id = await USER.findOne({fullName:Name})
-            return id._id
-            
-        } catch (error) {
-            
-        }
-        
-        
+        const id = await USER.findOne({fullName:Name})
+        return id._id
+
     },
     async GetRoomID(SN,RN){
         const roomID = await Room.findOne({$and:[
@@ -60,15 +52,15 @@ module.exports = {
     },
 
     checkTime(Recv_Time){
-        const date = moment().format('L')
+        const date = moment().tz("Asia/Kolkata").format('L')
         Recv_Time = Recv_Time.split(",")
 
         if(date === Recv_Time[1]){
-           let time = moment(`${Recv_Time[0]}`,"h:mm a").fromNow()
+           let time = moment(`${Recv_Time[0]}`,"h:mm a").tz("Asia/Kolkata").fromNow()
            return time
         }
         else{
-            let days= moment(`${Recv_Time[1]}`,"MM/DD/YYYY").fromNow()
+            let days= moment(`${Recv_Time[1]}`,"MM/DD/YYYY").tz("Asia/Kolkata").fromNow()
             return days
         }
     },
@@ -82,7 +74,7 @@ module.exports = {
     },
 
     async updateRoom(id){
-        await Room.findOneAndUpdate({_id:id},{$set:{updatedAt:moment().format()}})
+        await Room.findOneAndUpdate({_id:id},{$set:{updatedAt:moment().tz("Asia/Kolkata").format()}})
     },
 
     async updateChatBg(img,name){
