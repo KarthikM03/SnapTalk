@@ -7,13 +7,40 @@ SnapTalk is a powerful cross-platform chat and file-transfer utility designed fo
 
 
 ## Demo
-
+<div align="center">
+    <h3>Demo</h3>
+    ![Demo](https://github.com/KarthikM03/SnapTalk/blob/main/Images/SnapTalk.gif?raw=true)
+</div>
 
 
 ## Screenshots
-
-<img src="https://github.com/KarthikM03/SnapTalk/blob/main/Images/HomePage%20without%20user.png?raw=true" />
-
+<div align="center">
+    <div>
+        <h3>Signup</h3>
+        <img style="width:150px;height:150px;" src="https://github.com/KarthikM03/SnapTalk/blob/main/Images/signup%20page.png?raw=true" />
+    </div>
+    <div>
+        <h3>Login</h3>
+        <img style="width:150px;height:150px;" src="https://github.com/KarthikM03/SnapTalk/blob/main/Images/chat%20page.png?raw=true" />
+    </div>
+    <div>
+        <h3>HomePage</h3>
+        <img style="width:150px;height:150px;" src="https://github.com/KarthikM03/SnapTalk/blob/main/Images/HomePage%20without%20user.png?raw=true" />
+    </div>
+    <div>
+        <h3>Search</h3>
+        <img style="width:150px;height:150px;" src="https://github.com/KarthikM03/SnapTalk/blob/main/Images/search%20page.png?raw=true" />
+    </div>
+    <div>
+        <h3>Profile</h3>
+        <img style="width:150px;height:150px;" src="https://github.com/KarthikM03/SnapTalk/blob/main/Images/profile%20page.png?raw=true" />
+    </div>
+    <div>
+        <h3>Chat</h3>
+        <img style="width:150px;height:150px;" src="https://github.com/KarthikM03/SnapTalk/blob/main/Images/chat%20page.png?raw=true" />
+    </div>
+    
+</div>
 
 ## Run Locally
 
