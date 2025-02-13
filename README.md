@@ -15,7 +15,7 @@ SnapTalk is a powerful cross-platform chat and file-transfer utility designed fo
     </div>
     <div>
         <h3>Login</h3>
-        <img src="https://github.com/KarthikM03/SnapTalk/blob/main/Images/chat%20page.png?raw=true" />
+        <img src="https://github.com/KarthikM03/SnapTalk/blob/main/Images/login%20page.png" />
     </div>
     <div>
         <h3>HomePage</h3>
