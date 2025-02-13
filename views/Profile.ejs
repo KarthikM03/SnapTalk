@@ -15,7 +15,7 @@
     <%- include('./partials/Navbar') %>
 
         <% if (locals.user) { %>
-            <div class="container ">
+            <div class="container mb-2">
                 <div class="bio d-flex justify-content-evenly gap-3 align-items-center p-1 mt-1 border rounded">
                     <div class="d-flex flex-column gap-2 justify-content-evenly align-items-center profileImg">
                         <div style="aspect-ratio: 1;background-image: url('<%=user.profile %>');background-size: cover;background-position: center;"
@@ -84,7 +84,7 @@
 
 
             <!-- POSTS -->
-            <div class="posts container d-flex gap-4 flex-wrap mt-4 ">
+            <div class="posts container d-flex gap-4 flex-wrap mt-4 mb-1 ">
                 <% posts.forEach(post=> { %>
                     <a href="/post/<%= post._id %>" class="shadow rounded nav-link post" >
                         <img src="<%= post.image %>" style="object-fit:cover;" alt="">

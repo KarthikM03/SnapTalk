@@ -30,18 +30,9 @@ module.exports = {
     },
 
     async getUserId(Name){
-        if(Name==="m k"){
-            Name = 'm k '
-        }
-        try {
-            const id = await USER.findOne({fullName:Name})
-            return id._id
-            
-        } catch (error) {
-            
-        }
-        
-        
+       
+        const id = await USER.findOne({fullName:Name})
+        return id._id
     },
     async GetRoomID(SN,RN){
         const roomID = await Room.findOne({$and:[
